@@ -1,14 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/global.css';
+import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Sobre mi";
 
 const identity = {
-    firstName: "Sarah",
-    country: "Canada",
-    occupation: "Technical Writer",
-    hobbies: ["photography", "birdwatching", "baseball"],
+    firstName: "Rodrigo",
+    country: "Argentina",
+    occupation: "Desarrollador web",
+    hobbies: ["Magia", "Guitarra", "Bicicleta"],
 };
 
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
@@ -16,9 +19,13 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
-<Layout title="Welcome to Astro.">
+<BaseLayout pageTitle = {   pageTitle   }>
     <main>
         <head>
             <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
@@ -26,15 +33,6 @@ const goal = 3;
             <title>{pageTitle}</title>
         </head>
         <body>
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/blog/">Blog</a>
-
-            <h1>{pageTitle}</h1>
-            <h2>... and my new Astro site!</h2>
-
-            <h1>Practicando Astro</h1>
-            <h1>Sobre mi</h1>
             <h2>... y mi nuevo astritoo!</h2>
 
             <p>Vamo a hacer ese blog a ver si lo ponemos a funcionar</p>
@@ -43,42 +41,48 @@ const goal = 3;
 
             <p>Here are a few facts about me:</p>
             <ul>
-                <li>My name is {identity.firstName}.</li>
+                <li>Mi nombre es {identity.firstName}.</li>
                 <li>
-                    I live in {identity.country} and I work as a {
+                    Vivo en {identity.country} y trabajo como {
                         identity.occupation
                     }.
                 </li>
                 {
                     identity.hobbies.length >= 2 && (
                         <li>
-                            Two of my hobbies are: {identity.hobbies[0]} and{" "}
+                            Dos de mis hobbies son: {identity.hobbies[0]} and{" "}
                             {identity.hobbies[1]}
                         </li>
                     )
                 }
             </ul>
-            <p>My skills are:</p>
+            <p>Mis skills son:</p>
             <ul>
-                {skills.map((skill) => <li>{skill}</li>)}
+                {skills.map((skill) => <li class="skill">{skill}</li>)}
             </ul>
 
-            {happy && <p>I am happy to be learning Astro!</p>}
+            {happy && <p>Aprendiendo astro!</p>}
 
-            {finished && <p>I finished this tutorial!</p>}
+            {finished && <p>Y termine el tutorial!</p>}
 
             {
                 goal === 3 ? (
-                    <p>My goal is to finish in 3 days.</p>
+                    <p>Mi objetivo es terminar en menos de 3 días.</p>
                 ) : (
-                    <p>My goal is not 3 days.</p>
+                    <p>Mi objetivo no son 3 días</p>
                 )
             }
         </body>
     </main>
-</Layout>
+</BaseLayout>
 
-<style>
+<style define:vars={{ skillColor, fontWeight, textCase }}>
+    .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+    }
+
     main {
         margin: auto;
         padding: 1rem;
